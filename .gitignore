@@ -1,0 +1,29 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Firebase
+google-services.json
+
+# Secrets / API keys
+secrets.properties
+*.keystore
+*.jks
+
+# ML model training artifacts (Phase 7 — keep repo lean, models are large binaries)
+*.h5
+*.tflite
+/ml-training/venv/
+/ml-training/**/__pycache__/
