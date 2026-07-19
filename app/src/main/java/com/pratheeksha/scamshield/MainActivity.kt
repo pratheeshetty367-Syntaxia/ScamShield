@@ -4,16 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.pratheeksha.scamshield.ui.navigation.ScamShieldBottomNavBar
+import com.pratheeksha.scamshield.ui.navigation.ScamShieldDestinations
+import com.pratheeksha.scamshield.ui.navigation.ScamShieldNavGraph
+import com.pratheeksha.scamshield.ui.settings.SettingsViewModel
 import com.pratheeksha.scamshield.ui.theme.ScamShieldTheme
 import dagger.hilt.android.AndroidEntryPoint
-import com.pratheeksha.scamshield.ui.navigation.ScamShieldNavGraph
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -21,25 +26,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ScamShieldTheme {
-                ScamShieldNavGraph()
+            val settingsViewModel: SettingsViewModel = hiltViewModel()
+            val settings by settingsViewModel.settings.collectAsState()
+
+            ScamShieldTheme(darkTheme = settings.isDarkMode) {
+                val navController = rememberNavController()
+                val backStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = backStackEntry?.destination?.route
+
+                Scaffold(
+                    bottomBar = {
+                        if (currentRoute != ScamShieldDestinations.Auth.route) {
+                            ScamShieldBottomNavBar(navController)
+                        }
+                    }
+                ) { innerPadding ->
+                    Box(modifier = Modifier.padding(innerPadding)) {
+                        ScamShieldNavGraph(navController = navController)
+                    }
+                }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ScamShieldTheme {
-        Greeting("Android")
     }
 }
