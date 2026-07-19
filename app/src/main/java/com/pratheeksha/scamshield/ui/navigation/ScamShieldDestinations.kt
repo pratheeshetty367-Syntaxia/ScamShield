@@ -5,4 +5,5 @@ sealed class ScamShieldDestinations(val route: String) {
     object Home : ScamShieldDestinations("home")
     object Settings : ScamShieldDestinations("settings")
     object ScamDatabase : ScamShieldDestinations("scam_database")
+    object Dashboard : ScamShieldDestinations("dashboard")
 }

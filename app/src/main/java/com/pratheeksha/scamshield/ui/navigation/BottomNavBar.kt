@@ -1,5 +1,6 @@
 package com.pratheeksha.scamshield.ui.navigation
 
+import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.runtime.getValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -22,7 +23,8 @@ data class BottomNavItem(
 private val bottomNavItems = listOf(
     BottomNavItem(ScamShieldDestinations.Home.route, "Home", Icons.Filled.Home),
     BottomNavItem(ScamShieldDestinations.Settings.route, "Settings", Icons.Filled.Settings),
-    BottomNavItem(ScamShieldDestinations.ScamDatabase.route, "Scam DB", Icons.Filled.Warning)
+    BottomNavItem(ScamShieldDestinations.ScamDatabase.route, "Scam DB", Icons.Filled.Warning),
+    BottomNavItem(ScamShieldDestinations.Dashboard.route, "Dashboard", Icons.Filled.BarChart)
 )
 
 @Composable
