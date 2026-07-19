@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -20,7 +21,8 @@ data class BottomNavItem(
 
 private val bottomNavItems = listOf(
     BottomNavItem(ScamShieldDestinations.Home.route, "Home", Icons.Filled.Home),
-    BottomNavItem(ScamShieldDestinations.Settings.route, "Settings", Icons.Filled.Settings)
+    BottomNavItem(ScamShieldDestinations.Settings.route, "Settings", Icons.Filled.Settings),
+    BottomNavItem(ScamShieldDestinations.ScamDatabase.route, "Scam DB", Icons.Filled.Warning)
 )
 
 @Composable

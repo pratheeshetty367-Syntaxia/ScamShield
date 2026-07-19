@@ -1,5 +1,6 @@
 package com.pratheeksha.scamshield.ui.navigation
 
+import com.pratheeksha.scamshield.ui.scamdb.ScamDatabaseScreen
 import com.pratheeksha.scamshield.ui.settings.SettingsScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -31,6 +32,9 @@ fun ScamShieldNavGraph(
         }
         composable(ScamShieldDestinations.Settings.route) {
             SettingsScreen()
+        }
+        composable(ScamShieldDestinations.ScamDatabase.route) {
+            ScamDatabaseScreen()
         }
     }
 }
