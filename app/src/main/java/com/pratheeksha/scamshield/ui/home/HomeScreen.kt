@@ -42,6 +42,15 @@ fun HomeScreen(
         }
 
         item {
+            Button(
+                onClick = { viewModel.testScamAlert() },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Test Scam Alert Notification")
+            }
+        }
+
+        item {
             Text(
                 text = "Recent Calls",
                 style = MaterialTheme.typography.titleMedium

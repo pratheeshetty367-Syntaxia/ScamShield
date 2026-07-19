@@ -1,6 +1,7 @@
 package com.pratheeksha.scamshield.ui.home
 
 import androidx.lifecycle.ViewModel
+import com.pratheeksha.scamshield.data.local.ScamAlertNotifier
 import com.pratheeksha.scamshield.domain.model.ProtectionStatus
 import com.pratheeksha.scamshield.domain.model.RiskLevel
 import com.pratheeksha.scamshield.domain.model.ScanRecord
@@ -16,7 +17,9 @@ data class HomeUiState(
 )
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val notifier: ScamAlertNotifier
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
@@ -63,6 +66,14 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             protectionStatus = _uiState.value.protectionStatus.copy(
                 isActive = !_uiState.value.protectionStatus.isActive
             )
+        )
+    }
+
+    fun testScamAlert() {
+        notifier.showScamAlert(
+            phoneNumber = "+91 98765 43210",
+            riskLevel = RiskLevel.CRITICAL,
+            reason = "Test alert - voice cloning detected"
         )
     }
 }
